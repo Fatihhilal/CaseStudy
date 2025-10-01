@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CaseStudy.Model;
+using CaseStudy.Service;
+using CaseStudy.Animals;
 
 namespace MyApplication
 {
@@ -6,19 +8,19 @@ namespace MyApplication
     {
         public static void Main(string[] args)
         {
-            bool devamEt = true;
+            bool continueProgram = true;
             
-            while (devamEt)
+            while (continueProgram)
             {
                 Console.Clear();
-                Console.WriteLine("=== Soru Seçim Menüsü ===");
-                Console.WriteLine("1. Birinci Soru - Try-Catch Yapısı");
-                Console.WriteLine("2. İkinci Soru");
-                Console.WriteLine("3. Üçüncü Soru");
-                Console.WriteLine("4. Dördüncü Soru");
-                Console.WriteLine("5. Beşinci Soru");
-                Console.WriteLine("0. Çıkış");
-                Console.Write("Lütfen bir seçim yapın (0-5): ");
+                Console.WriteLine("=== Question Selection Menu ===");
+                Console.WriteLine("1. First Question - Try-Catch Structure");
+                Console.WriteLine("2. Second Question");
+                Console.WriteLine("3. Third Question");
+                Console.WriteLine("4. Fourth Question");
+                Console.WriteLine("5. Fifth Question");
+                Console.WriteLine("0. Exit");
+                Console.Write("Please make a selection (0-5): ");
                 
                 string input = Console.ReadLine();
                 
@@ -27,85 +29,142 @@ namespace MyApplication
                     switch (choice)
                     {
                         case 0:
-                            Console.WriteLine("Program sonlandırılıyor...");
-                            devamEt = false;
+                            Console.WriteLine("Program is terminating...");
+                            continueProgram = false;
                             break;
                         case 1:
-                            BirinciSoru();
+                            FirstQuestion();
                             break;
                         case 2:
-                            IkinciSoru();
+                            SecondQuestion();
                             break;
                         case 3:
-                            UcuncuSoru();
+                            ThirdQuestion().Wait();
                             break;
                         case 4:
-                            DorduncuSoru();
+                            FourthQuestion();
                             break;
                         case 5:
-                            BesinciSoru();
+                            FifthQuestion();
                             break;
                         default:
-                            Console.WriteLine("Geçersiz seçim! Lütfen 0-5 arasında bir sayı girin.");
+                            Console.WriteLine("Invalid selection! Please enter a number between 0-5.");
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Geçersiz giriş! Lütfen bir sayı girin.");
+                    Console.WriteLine("Invalid input! Please enter a number.");
                 }
                 
-                if (devamEt)
+                if (continueProgram)
                 {
-                    Console.WriteLine("\nDevam etmek için herhangi bir tuşa basın...");
+                    Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                 }
             }
         }
 
-        public static void BirinciSoru()
+        public static void FirstQuestion()
         {
-            Console.WriteLine("\n=== Birinci Soru: Try-Catch Yapısı ===");
+            Console.WriteLine("\n First Question: Try-Catch Structure");
 
             int[] numbers = { 1, 2, 3 };
 
             try
             {
+                Console.WriteLine("Array elements: [1, 2, 3]");
                 Console.WriteLine(numbers[5]);
             }
             catch (IndexOutOfRangeException ex)
             {
-                Console.WriteLine($"Hata yakalandı: {ex.Message}");
-                Console.WriteLine("Dizinin sınırları dışında bir indekse erişmeye çalıştınız.");
+                Console.WriteLine($"Error caught: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Beklenmeyen bir hata oluştu: {ex.Message}");
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
 
-        public static void IkinciSoru()
+        public static void SecondQuestion()
         {
-            Console.WriteLine("\n=== İkinci Soru ===");
-            Console.WriteLine("İkinci soru henüz hazırlanmadı.");
+            Console.WriteLine("\n Second Question: Person Class");
+            
+            Console.Write("Please enter your name: ");
+            string name = Console.ReadLine();
+            
+            Console.Write("Please enter your age: ");
+            string ageInput = Console.ReadLine();
+            
+            if (int.TryParse(ageInput, out int age))
+            {
+                Person person = new Person(name, age);
+                string introduction = person.Introduce();
+                
+                Console.WriteLine("\n Introduction:");
+                Console.WriteLine(introduction);
+            }
+            else
+            {
+                Console.WriteLine("Invalid age input! Please enter a valid number.");
+            }
         }
 
-        public static void UcuncuSoru()
+        public static async Task ThirdQuestion()
         {
-            Console.WriteLine("\n=== Üçüncü Soru ===");
-            Console.WriteLine("Üçüncü soru henüz hazırlanmadı.");
+            Console.WriteLine("\n Third Question: Async Methods");
+            
+            CountService countService = new CountService();
+
+            Task<int> userCountTask = countService.GetUserCountAsync();
+            Task<int> orderCountTask = countService.GetOrderCountAsync();
+            Task<int> productCountTask = countService.GetProductCountAsync();
+            
+            Console.WriteLine("All three async methods started simultaneously!");
+            Console.WriteLine("Waiting for all results to complete...");
+        
+            int[] results = await Task.WhenAll(userCountTask, orderCountTask, productCountTask);
+            
+            Console.WriteLine("\n All Results Completed ===");
+            Console.WriteLine($"User Count: {results[0]}");
+            Console.WriteLine($"Order Count: {results[1]}");
+            Console.WriteLine($"Product Count: {results[2]}");
         }
 
-        public static void DorduncuSoru()
+        public static void FourthQuestion()
         {
-            Console.WriteLine("\n=== Dördüncü Soru ===");
-            Console.WriteLine("Dördüncü soru henüz hazırlanmadı.");
+            Console.WriteLine("\n Fourth Question: LINQ GetMax Method" );
+        
+            List<int> numbers = new List<int> { 5, 2, 8, 1, 9, 3 };
+
+            int? max = GetMax(numbers);
+
+            Console.WriteLine($"List: [{string.Join(", ", numbers)}]");
+            Console.WriteLine($"Maximum value: {max}");
+        }
+        
+        public static int? GetMax(List<int> list)
+        {
+            if (list==null || !list.Any())
+            {
+                return null;
+            }
+            return list.Max();
         }
 
-        public static void BesinciSoru()
+        public static void FifthQuestion()
         {
-            Console.WriteLine("\n=== Beşinci Soru ===");
-            Console.WriteLine("Beşinci soru henüz hazırlanmadı.");
+            Console.WriteLine("\n Fifth Question: Polymorphic Structure");
+            
+            IAnimal[] animals = {
+                new Dog(),
+                new Cat()
+            };
+            
+            foreach (IAnimal animal in animals)
+            {
+                animal.MakeSound();
+            }
         }
     }
 }
