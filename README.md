@@ -1,81 +1,134 @@
-# C# Case Study - Programming Questions
+# C# Case Study - Programming Questions & Solutions
 
-Bu proje, C# programlama dili ile ilgili çeşitli konuları kapsayan sorular ve çözümlerini içermektedir.
+Bu proje, C# programlama dili ile ilgili çeşitli konuları kapsayan 5 soru ve bunların tam çözümlerini içermektedir. Her soru farklı bir C# konseptini (Exception Handling, OOP, Async Programming, LINQ, Polymorphism) göstermektedir.
 
-## Sorular
+## 📋 Sorular ve Çözümler
 
-### 1. Try-Catch Yapısı
-Aşağıdaki kod bloğunda oluşabilecek bir hatayı yakalayacak şekilde try-catch yapısını yazınız:
+### 1. ✅ Try-Catch Yapısı (Exception Handling)
+**Soru:** Aşağıdaki kod bloğunda oluşabilecek bir hatayı yakalayacak şekilde try-catch yapısını yazınız:
 ```csharp
 int[] numbers = {1, 2, 3}; 
 Console.WriteLine(numbers[5]);
 ```
 
-### 2. Person Sınıfı
-Person adında bir sınıf oluşturun:
+**Çözüm:** IndexOutOfRangeException yakalanır ve kullanıcı dostu hata mesajı gösterilir.
+
+### 2. ✅ Person Sınıfı (OOP Basics)
+**Soru:** Person adında bir sınıf oluşturun:
 - **Özellikler:** Name (string), Age (int)
 - **Constructor** ile bu özellikleri atayın
 - **Introduce** adında bir metod ekleyin ve "Merhaba, benim adım {Name} ve {Age} yaşındayım." mesajını döndürsün.
 
-### 3. Asenkron Programlama
-Aşağıdaki üç asenkron metodu tek seferde çalıştırmak ve tüm sonuçlar tamamlandığında ekrana yazdırmak için kodu yazın:
+**Çözüm:** Model/Person.cs dosyasında tam implementasyon. Kullanıcıdan isim ve yaş alınır, Person objesi oluşturulur.
+
+### 3. ✅ Asenkron Programlama (Parallel Tasks)
+**Soru:** Aşağıdaki üç asenkron metodu tek seferde çalıştırmak ve tüm sonuçlar tamamlandığında ekrana yazdırmak için kodu yazın:
 ```csharp
 Task<int> GetUserCountAsync();    // kullanıcı sayılarını döndüren metod
 Task<int> GetOrderCountAsync();   // sipariş sayılarını döndüren metod
 Task<int> GetProductCountAsync(); // ürün sayılarını döndüren metod
 ```
 
-### 4. LINQ ve Generics
-Bir listedeki tam sayı değerlerinden en büyüğünü döndüren aşağıdaki metodu tamamlayınız:
+**Çözüm:** Service/CountService.cs ile async metodlar, Task.WhenAll() ile paralel çalıştırma.
+
+### 4. ✅ LINQ GetMax Metodu (LINQ & Generics)
+**Soru:** Bir listedeki tam sayı değerlerinden en büyüğünü döndüren metodu tamamlayınız:
 ```csharp
-int? GetMax(List<int> list) 
-{ 
-    //… 
-}
+int? GetMax(List<int> list) { //… }
 ```
 
-### 5. OOP ve Polimorfizm
-Aşağıdaki kodda OOP hatası var. Düzeltilmiş ve polimorfik bir yapı yazınız:
+**Çözüm:** LINQ Max() metodu kullanılarak null-safe implementasyon.
+
+### 5. ✅ OOP Polimorfizm (Interface-based Design)
+**Soru:** Aşağıdaki kodda OOP hatası var. Düzeltilmiş ve polimorfik bir yapı yazınız:
 ```csharp
-public class Animal 
-{ 
-    public void MakeSound(string type) 
-    { 
-        if(type == "Dog") 
-            Console.WriteLine("Hav"); 
-        else if(type == "Cat") 
-            Console.WriteLine("Miyav"); 
+public class Animal { 
+    public void MakeSound(string type) { 
+        if(type == "Dog") Console.WriteLine("Hav"); 
+        else if(type == "Cat") Console.WriteLine("Miyav"); 
     } 
 }
 ```
 
-## Proje Yapısı
+**Çözüm:** IAnimal interface ile Dog ve Cat sınıfları. If-else yerine polimorfik yapı.
 
-- `Program.cs` - Ana program dosyası, menü sistemi ve tüm soruların çözümlerini içerir
-- `README.md` - Bu dosya, proje açıklaması ve sorular
-- `.gitignore` - Git için ignore edilecek dosyalar
-
-## Kullanım
-
-Projeyi çalıştırdığınızda bir menü sistemi karşınıza çıkacak. 1-5 arası sayılar ile soruları seçebilir, 0 ile programdan çıkabilirsiniz.
+## 📁 Proje Yapısı
 
 ```
-=== Soru Seçim Menüsü ===
-1. Birinci Soru - Try-Catch Yapısı
-2. İkinci Soru
-3. Üçüncü Soru
-4. Dördüncü Soru
-5. Beşinci Soru
-0. Çıkış
+CaseStudy/
+├── Program.cs              # Ana program ve menü sistemi
+├── Model/
+│   └── Person.cs          # Person sınıfı (Soru 2)
+├── Service/
+│   └── CountService.cs    # Async servis metodları (Soru 3)
+├── Animals/
+│   ├── Animal.cs          # IAnimal interface (Soru 5)
+│   ├── Dog.cs            # Dog sınıfı
+│   └── Cat.cs            # Cat sınıfı
+├── README.md             # Bu dosya
+└── .gitignore           # Git ignore kuralları
 ```
 
-## Gereksinimler
+## 🚀 Kullanım
+
+Projeyi çalıştırdığınızda interaktif bir menü sistemi açılır:
+
+```
+=== Question Selection Menu ===
+1. First Question - Try-Catch Structure
+2. Second Question - Person Class  
+3. Third Question - Async Methods
+4. Fourth Question - LINQ GetMax Method
+5. Fifth Question - Polymorphic Structure
+0. Exit
+```
+
+Her soru seçildiğinde:
+- **Soru 1:** Try-catch örneği çalışır
+- **Soru 2:** İsim/yaş girişi alır, Person objesi oluşturur
+- **Soru 3:** 3 async metodu paralel çalıştırır
+- **Soru 4:** Liste maksimum değerini LINQ ile bulur
+- **Soru 5:** Polimorfik animal sesleri gösterir
+
+## 🛠️ Teknik Detaylar
+
+### Kullanılan C# Konseptleri:
+- **Exception Handling:** try-catch-finally
+- **OOP:** Classes, Interfaces, Inheritance
+- **Async Programming:** Task, async/await, Task.WhenAll()
+- **LINQ:** Max(), Any() metodları
+- **Polymorphism:** Interface-based design
+- **Generics:** List<T>, nullable types
+
+### Özellikler:
+- ✅ Sürekli çalışan menü sistemi (0 ile çıkış)
+- ✅ Input validation ve error handling
+- ✅ Clean code principles
+- ✅ Proper namespace organization
+- ✅ English variable/method names
+
+## ⚙️ Gereksinimler
 
 - .NET 8.0 veya üzeri
 - C# 12.0
 
-## Çalıştırma
+## 🏃‍♂️ Çalıştırma
 
 ```bash
+# Projeyi çalıştır
 dotnet run
+
+# Build et
+dotnet build
+
+# Restore packages
+dotnet restore
 ```
+
+## 📝 Notlar
+
+- Tüm sorular tam olarak implementasyonu yapılmıştır
+- Kod English naming conventions kullanır
+- Her soru ayrı metodlarda organize edilmiştir
+- Proje modüler yapıda tasarlanmıştır
+- Git için uygun .gitignore yapılandırması mevcuttur
