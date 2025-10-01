@@ -1,23 +1,68 @@
-# Ignore node_modules
-node_modules/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
-# Ignore build outputs
-dist/
-build/
+# Visual Studio 2015/2017 cache/options directory
+.vs/
 
-# Ignore environment files
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Environment files
 .env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Ignore logs
-logs/
-*.log
-
-# Ignore system files
+# System files
 .DS_Store
 Thumbs.db
 
-# Ignore IDE-specific files
+# IDE files
 .vscode/
 .idea/
 *.iml
+*.swp
+*.swo
+
+# Package files
+*.nupkg
+*.snupkg
+
+# NuGet Packages
+*.nupkg
+packages/
