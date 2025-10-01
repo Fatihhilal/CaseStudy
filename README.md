@@ -100,12 +100,6 @@ Her soru seçildiğinde:
 - **Polymorphism:** Interface-based design
 - **Generics:** List<T>, nullable types
 
-### Özellikler:
-- ✅ Sürekli çalışan menü sistemi (0 ile çıkış)
-- ✅ Input validation ve error handling
-- ✅ Clean code principles
-- ✅ Proper namespace organization
-- ✅ English variable/method names
 
 ## ⚙️ Gereksinimler
 
