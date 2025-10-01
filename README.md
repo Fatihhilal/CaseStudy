@@ -118,11 +118,3 @@ dotnet build
 # Restore packages
 dotnet restore
 ```
-
-## 📝 Notlar
-
-- Tüm sorular tam olarak implementasyonu yapılmıştır
-- Kod English naming conventions kullanır
-- Her soru ayrı metodlarda organize edilmiştir
-- Proje modüler yapıda tasarlanmıştır
-- Git için uygun .gitignore yapılandırması mevcuttur
